@@ -4,12 +4,14 @@ const nodemailer = require("nodemailer");
 
 // config mail (Gmail)
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.EMAIL_HOST,      // sandbox.smtp.mailtrap.io
+  port: process.env.EMAIL_PORT,      // 2525
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS   
   }
 });
+
 
 router.post("/send", async (req, res) => {
   const { email, subject, message } = req.body;
